@@ -1,6 +1,6 @@
 defmodule Day03 do
   @mulregex ~r/mul\((\d{1,3}),(\d{1,3})\)/
-
+  @p2regex ~r/(mul\((\d{1,3}),(\d{1,3})\))|(do\(\))|(don't\(\))/
   @spec part1(binary()) :: number()
   def part1(input) do
     lines = String.split(input, "\n", trim: true)
@@ -19,7 +19,28 @@ defmodule Day03 do
     )
   end
 
+  # do we need to handle do / don't across lines? let's assume so
   @spec part2(binary()) :: number()
   def part2(input) do
+    matches = Regex.scan(@p2regex, input, include_captures: true)
+
+    {out, _} =
+      Enum.reduce(matches, {0, true}, fn [match, _, x, y | _], {sum, enabled} ->
+        cond do
+          match == "do()" ->
+            {sum, true}
+
+          match == "don't()" ->
+            {sum, false}
+
+          not enabled ->
+            {sum, enabled}
+
+          enabled ->
+            {sum + String.to_integer(x) * String.to_integer(y), enabled}
+        end
+      end)
+
+    out
   end
 end

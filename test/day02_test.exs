@@ -16,6 +16,6 @@ defmodule Day02Test do
   end
 
   test "part2" do
-    assert Day02.part2(@example_input) == 31
+    assert Day02.part2(@example_input) == 4
   end
 end

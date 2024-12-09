@@ -137,7 +137,7 @@ defmodule Day02 do
     end
   end
 
-  @spec part2(binary()) :: any()
+  @spec part2(binary()) :: number()
   def part2(input) do
     lines = String.split(input, "\n", trim: true)
 

@@ -20,6 +20,6 @@ defmodule Day04Test do
   end
 
   test "part2" do
-    assert Day04.part2(@example_input) == 48
+    assert Day04.part2(@example_input) == 9
   end
 end
